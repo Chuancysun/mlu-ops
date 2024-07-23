@@ -14365,6 +14365,42 @@ mluOpExecFFT(mluOpHandle_t handle,
  */
 mluOpStatus_t MLUOP_WIN_API
 mluOpDestroyFFTPlan(mluOpFFTPlan_t fft_plan);
+/*
+ * @param[in] handle
+ *   Handle to a Cambricon MLUOP context that is used to manage MLU devices and
+ *   queues in the deformable convolution backward data operation. For detailed information,
+ *   see ::mluOpHandle_t.
+ * @param[in] x_desc
+ *   The descriptor of the input tensor. For detailed information,
+ *   see ::mluOpTensorDescriptor_t.
+ * @param[in] x
+ *   Pointer to the MLU memory that stores the input tensor.
+ * @param[in] y_desc
+ *   The descriptor of the output tensor. For detailed information,
+ *   see ::mluOpTensorDescriptor_t.
+ * @param[out] y
+ *   Pointer to the MLU memory that stores the output tensor.
+ * @param[out] info
+ *     -     = 0:  successful exit
+ *     -     < 0:  if INFO = -i, the i-th argument had an illegal value
+ *                 or another error occured, such as memory allocation failed.
+ *     -     > 0:  if INFO = i, U(i,i) is exactly zero. The factorization
+ *                 has been completed, but the factor U is exactly
+ *                 singular, and division by zero will occur if it is used
+ *                 to solve a system of equations.
+ * @param[in] mode
+ *   option to perform operation with pivoting/no pivoting versions 
+ */
+  mluOpStatus_t MLUOP_WIN_API
+  mluOpSgetrf2(mluOpHandle_t handle,
+              const mluOpTensorDescriptor_t x_desc,
+              void *x,
+              const mluOpTensorDescriptor_t y_desc,
+              void *y,
+              int *ipiv,
+              int *info,
+              int mode);
+
 #if defined(__cplusplus)
 }
 #endif
